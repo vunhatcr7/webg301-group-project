@@ -1,0 +1,78 @@
+{# filepath: templates/user_view/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ device.name }}
+	Details
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4">
+		<a href="{{ path('app_user_view') }}">back to list</a>
+		<h1>{{ device.name }}</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">{{ device.name }}</h5>
+						<p class="card-text">
+							<strong>Category:</strong>
+							{{ device.category.name }}<br>
+							<strong>Model:</strong>
+							{{ device.model }}<br>
+							<strong>Manufacturer:</strong>
+							{{ device.manufacturer }}<br>
+							<strong>Price:</strong>
+							${{ device.price }}<br>
+							<strong>Average Rating:</strong>
+							{{ device.averageRating }}
+						</p>
+						<form method="post" action="{{ path('add_to_cart', { id: device.id }) }}">
+							<button type="submit" class="btn btn-success">Add to Cart</button>
+						</form>
+					</div>
+				</div>
+				<div class="mt-4">
+					<h4>Comments</h4>
+					<div class="mt-4">
+						{% for Comment in device.comments %}
+							<div class="mb-3">
+								<strong>Comment #{{ Comment.id }}</strong>:
+								<p>{{ Comment.Content }}</p>
+							</div>
+						{% else %}
+							<p>No comments yet. Be the first to comment!</p>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<h3>Rating</h3>
+				<form method="post" action="{{ path('rate_device', { id: device.id }) }}">
+					<div class="mb-3">
+						<label for="rating" class="form-label">Rate this product:</label>
+						<select id="rating" name="rating" class="form-select">
+							<option value="1">1 - Poor</option>
+							<option value="2">2 - Fair</option>
+							<option value="3">3 - Good</option>
+							<option value="4">4 - Very Good</option>
+							<option value="5">5 - Excellent</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit Rating</button>
+				</form>
+
+				<h3 class="mt-4">Comments</h3>
+				<form method="post" action="{{ path('add_comment', { id: device.id }) }}">
+					<div class="mb-3">
+						<label for="comment" class="form-label">Leave a comment:</label>
+						<textarea id="comment" name="comment" class="form-control" rows="3"></textarea>
+					</div>
+					<button type="submit" class="btn btn-secondary">Submit Comment</button>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

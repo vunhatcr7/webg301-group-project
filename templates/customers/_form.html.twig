@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+<div class="form-group">
+    {% for field in form %}
+        <div class="mb-3">
+            {% if field.vars.name == 'Gender' %}
+                {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+                <div class="form-check">
+                    {{ form_widget(field, {'attr': {'class': 'form-check-input'}}) }}
+                </div>
+                <small class="form-text text-muted">Nếu là nam, vui lòng tick vào đây.</small>
+            {% else %}
+                {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+            {% endif %}
+            {{ form_errors(field) }}
+        </div>
+    {% endfor %}
+</div>
+<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

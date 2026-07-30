@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customers index{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <h1>Customers List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>PhoneNumber</th>
+                {# <th>FullName</th> #}
+                <th>Name</th>
+                <th>Age</th>
+                {# <th>DateOfBirth</th> #}
+                {# <th>Gender</th> #}
+                <th>Email</th>
+                {# <th>Address</th> #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for customer in customers %}
+            <tr>
+                <td>{{ customer.id }}</td>
+                <td>{{ customer.PhoneNumber }}</td>
+                {# <td>{{ customer.FullName }}</td> #}
+                <td>{{ customer.Name }}</td>
+                <td>{{ customer.Age }}</td>
+                {# <td>{{ customer.DateOfBirth ? customer.DateOfBirth|date('Y-m-d H:i:s') : '' }}</td> #}
+                {# <td>{{ customer.Gender ? 'Yes' : 'No' }}</td> #}
+                <td>{{ customer.Email }}</td>
+                {# <td>{{ customer.Address }}</td> #}
+                <td>
+                    <a href="{{ path('app_customers_show', {'id': customer.id}) }}">show</a> | 
+                    <a href="{{ path('app_customers_edit', {'id': customer.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_customers_new') }}">Create new</a>
+</div>
+{% endblock %}

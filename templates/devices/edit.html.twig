@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Devices{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <a href="{{ path('app_devices_index') }}">back to list</a>
+
+    <h1>Edit Devices</h1>
+
+    {{ include('devices/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+    {{ include('devices/_delete_form.html.twig') }}
+</div>
+{% endblock %}

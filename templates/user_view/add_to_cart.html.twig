@@ -1,0 +1,36 @@
+{# filepath: templates/user_view/add_to_cart.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Add to Cart
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4">
+		{# <a href="{{ path('user_device_show') }}">back to list</a> #}
+
+		<h1>Add
+			{{ device.name }}
+			to Cart</h1>
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">{{ device.name }}</h5>
+				<p class="card-text">
+					<strong>Category:</strong>
+					{{ device.category.name }}<br>
+					<strong>Model:</strong>
+					{{ device.model }}<br>
+					<strong>Manufacturer:</strong>
+					{{ device.manufacturer }}<br>
+					<strong>Price:</strong>
+					${{ device.price }}
+				</p>
+			</div>
+		</div>
+
+		<h3 class="mt-4">Select Customer</h3>
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		<button type="submit" class="btn btn-primary mt-3">Add to Cart</button>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

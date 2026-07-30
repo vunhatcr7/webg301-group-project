@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Devices{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <a href="{{ path('app_devices_index') }}">back to list</a>
+
+    <h1>Create new Device</h1>
+
+    {{ include('devices/_form.html.twig') }}
+</div>
+{% endblock %}

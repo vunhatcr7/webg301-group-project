@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Devices index{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <h1>Devices List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Model</th>
+                <th>Manufacturer</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>AverageRating</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for device in devices %}
+            <tr>
+                <td>{{ device.id }}</td>
+                <td>{{ device.Name }}</td>
+                <td>{{ device.Model }}</td>
+                <td>{{ device.Manufacturer }}</td>
+                <td>{{ device.Category.name }}</td>
+                <td>{{ device.Price }}</td>
+                <td>{{ device.AverageRating }}</td>
+                <td>
+                    <a href="{{ path('app_devices_show', {'id': device.id}) }}">show</a> | 
+                    <a href="{{ path('app_devices_edit', {'id': device.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_devices_new') }}">Create new</a>
+</div>
+{% endblock %}
