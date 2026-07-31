@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
@@ -13,9 +13,18 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "Category name is required.")]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: "Category name cannot exceed {{ limit }} characters."
+        )]
     #[ORM\Column(length: 50)]
     private ?string $Name = null;
 
+    #[Assert\Length(
+    max: 255,
+    maxMessage: "Description cannot exceed {{ limit }} characters."
+        )]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Description = null;
 
