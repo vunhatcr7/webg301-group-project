@@ -33,6 +33,10 @@ final class RatingController extends AbstractController
             $entityManager->persist($rating);
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'The rating has been added successfully.'
+            );
             return $this->redirectToRoute('app_rating_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,6 +63,10 @@ final class RatingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'The rating has been updated successfully.'
+            );
             return $this->redirectToRoute('app_rating_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -74,6 +82,11 @@ final class RatingController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$rating->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($rating);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'The rating has been deleted successfully.'
+            );
         }
 
         return $this->redirectToRoute('app_rating_index', [], Response::HTTP_SEE_OTHER);

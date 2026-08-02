@@ -47,6 +47,10 @@ final class CustomersController extends AbstractController
             $entityManager->persist($customer);
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'The customer has been added successfully.'
+            );
             return $this->redirectToRoute('app_customers_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -73,6 +77,10 @@ final class CustomersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'The customer has been updated successfully.'
+            );
             return $this->redirectToRoute('app_customers_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -88,6 +96,11 @@ final class CustomersController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $customer->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($customer);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'The customer has been deleted successfully.'
+            );
         }
 
         return $this->redirectToRoute('app_customers_index', [], Response::HTTP_SEE_OTHER);
