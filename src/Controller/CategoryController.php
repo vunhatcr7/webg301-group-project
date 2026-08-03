@@ -46,6 +46,7 @@ public function index(Request $request, CategoryRepository $categoryRepository):
             $entityManager->persist($category);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Category created successfully.');
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -72,6 +73,10 @@ public function index(Request $request, CategoryRepository $categoryRepository):
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'The category has been updated successfully.'
+            );
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -91,6 +96,11 @@ public function index(Request $request, CategoryRepository $categoryRepository):
         if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $entityManager->remove($category);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'The category has been deleted successfully.'
+            );
             $categories = $categoryRepository->createQueryBuilder('c')
                 ->orderBy('c.Position', 'ASC')
                 ->getQuery()

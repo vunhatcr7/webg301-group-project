@@ -34,6 +34,10 @@ final class DevicesController extends AbstractController
             $entityManager->persist($device);
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'The device has been added successfully.'
+            );
             return $this->redirectToRoute('app_devices_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -60,6 +64,10 @@ final class DevicesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'The device has been updated successfully.'
+            );
             return $this->redirectToRoute('app_devices_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -75,6 +83,11 @@ final class DevicesController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$device->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($device);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'The device has been deleted successfully.'
+            );
         }
 
         return $this->redirectToRoute('app_devices_index', [], Response::HTTP_SEE_OTHER);
