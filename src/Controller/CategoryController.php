@@ -15,12 +15,17 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CategoryController extends AbstractController
 {
     #[Route(name: 'app_category_index', methods: ['GET'])]
-    public function index(CategoryRepository $categoryRepository): Response
-    {
-        return $this->render('category/index.html.twig', [
-            'categories' => $categoryRepository->findAll(),
-        ]);
-    }
+public function index(Request $request, CategoryRepository $categoryRepository): Response
+{
+    $keyword = $request->query->get('keyword');
+
+    $categories = $categoryRepository->findByName($keyword);
+
+    return $this->render('category/index.html.twig', [
+        'categories' => $categories,
+        'keyword' => $keyword,
+    ]);
+}
 
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response
