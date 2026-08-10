@@ -7,9 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
+
 final class Version20250402025303 extends AbstractMigration
 {
     public function getDescription(): string
@@ -19,7 +17,7 @@ final class Version20250402025303 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
+        
         $this->addSql(<<<'SQL'
             ALTER TABLE devices CHANGE average_rating average_rating DOUBLE PRECISION DEFAULT NULL
         SQL);
@@ -33,7 +31,7 @@ final class Version20250402025303 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
+        
         $this->addSql(<<<'SQL'
             ALTER TABLE devices DROP FOREIGN KEY FK_11074E9A12469DE2
         SQL);

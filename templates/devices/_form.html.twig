@@ -1,12 +1,14 @@
 {{ form_start(form) }}
-    <div class="form-group">
+    <div class="row g-3">
         {% for field in form %}
-            <div class="mb-3">
-                {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+            <div class="col-12 col-md-6">
+                {{ form_label(field, null, {'label_attr': {'class': 'form-label fw-semibold'}}) }}
                 {{ form_widget(field, {'attr': {'class': field.vars.block_prefixes|last == 'choice' ? 'form-select' : 'form-control'}}) }}
-                {{ form_errors(field) }}
+                {{ form_errors(field, {'attr': {'class': 'text-danger small mt-1 d-block'}}) }}
             </div>
         {% endfor %}
     </div>
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    <div class="mt-4">
+        <button class="btn btn-primary px-4">{{ button_label|default('Save') }}</button>
+    </div>
 {{ form_end(form) }}
